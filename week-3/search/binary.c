@@ -12,34 +12,35 @@ int main()
     if (binary_search(amount,lenght, list_amounts) == true)
     {
         printf("This amount exist in list of amounts!\n");
+        return 0;
     }
     else
     {
         printf("This amount not exist in list of amounts!\n");
+        return 1;
     }
 }
 
 bool binary_search(int value, int lenght, int *list_values)
 {
-    int n = lenght/2;
+    int min = 0;
     int max = lenght;
+    int middle;
     do
     {
-        if (n < 0 || n > max)
-        {
-            return false;
-        }
-        if (value == list_values[n])
+        middle = (min+max)/2;
+        if (value == list_values[middle])
         {
             return true;
         }
-        else if(value < list_values[n])
+        else if(value < list_values[middle])
         {
-            n-=n/2;
+            max = middle-1;
         }
-        else if(value > list_values[n])
+        else if(value > list_values[middle])
         {
-            n+=n/2;
+            min = middle+1;
         }
-    } while (true);
+    } while (min <= max);
+    return false;
 }
