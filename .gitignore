@@ -1,5 +1,10 @@
-/*
-!/*/
+# Ignora todos os arquivos sem ponto no nome
+*
+# A menos que seja um diretório (para não quebrar a estrutura)
+!*/
+# A menos que seja o .gitignore
+!.gitignore
+# A menos que seja um arquivo específico que você quer manter (ex: Makefile)
+!Makefile
 !*.c
 !*.h
-!.gitignore
