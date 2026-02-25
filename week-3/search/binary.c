@@ -1,15 +1,15 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-bool binary_search(int value, int lenght, int *list_values);
+bool binary_search(int value, int length, int *list_values);
 int main()
 {
     int amount;
     int list_amounts[] = {10,20,30,40,50,60,70,80,90,100};
-    int lenght = sizeof(list_amounts)/sizeof(list_amounts[0]);
+    int length = sizeof(list_amounts)/sizeof(list_amounts[0]);
     printf("Digit an amount from 10 to 100: ");
     scanf("%d", &amount);
-    if (binary_search(amount,lenght, list_amounts) == true)
+    if (binary_search(amount,length, list_amounts) == true)
     {
         printf("This amount exist in list of amounts!\n");
         return 0;
@@ -21,11 +21,11 @@ int main()
     }
 }
 
-bool binary_search(int value, int lenght, int *list_values)
+bool binary_search(int value, int length, int *list_values)
 {
     int min = 0;
-    int max = lenght;
-    int middle;
+    int max = length - 1;
+    int middle; 
     do
     {
         middle = (min+max)/2;
