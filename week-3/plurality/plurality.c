@@ -8,8 +8,6 @@ typedef struct
 {
     char **names;
     int *votes;
-    int n_candidatos;
-
 }cand;
 
 void selection(int length, int *list);
@@ -17,12 +15,12 @@ int main(int argc, char *argv[])
 {
     int voters;
     cand candidatos;
-    candidatos.n_candidatos = argc - 1;
     candidatos.names = argv;
     //aviso caso o programa seja executado errado
     if (argc == 1)
     {
         printf("Usage: plurality [candidate ...]\n");
+        return 1;
     }
     //define um limite para o maximo de candidatos (9)
     if (argc > MAX)
@@ -31,13 +29,13 @@ int main(int argc, char *argv[])
     }
     printf("Numbeer of voters: ");
     scanf("%d", &voters);
-    for (int i = 1; i <= voters; i++)
+    for (int i = 1; i < voters; i++)
     {
         char nomedovoto[50];
         bool status_vote = false;
         printf("Vote: ");
         scanf("%49[^\n]", nomedovoto);
-        for (int i = 1; i < candidatos.n_candidatos; i++)
+        for (int i = 1; i < argc; i++)
         {
             if (strcmp(nomedovoto, candidatos.names[i]))
             {
@@ -50,8 +48,8 @@ int main(int argc, char *argv[])
             printf("Invalid vote.\n");
         }
     }
-    selection(candidatos.n_candidatos, candidatos.votes);
-    printf("%s", candidatos.names[argc]);
+    selection(argc, candidatos.votes);
+    printf("%s", candidatos.names[argc-1]);
 }
 
 void selection(int length, int *list)
