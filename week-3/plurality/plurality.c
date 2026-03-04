@@ -2,69 +2,80 @@
 #include <string.h>
 #include <stdbool.h>
 
-#define MAX 10
+#define MAX 9
 
 typedef struct 
 {
-    char **names;
-    int *votes;
+    char names[50];
+    int votes;
 }cand;
 
-void selection(int length, int *list);
+void selection(int length, cand list[]);
 int main(int argc, char *argv[])
 {
     int voters;
-    cand candidatos;
-    candidatos.names = argv;
+    int length = argc - 1;
+    cand candidatos[length];
+    bool statusvote;
+
+    for (int i = 0; i < length; i++)
+    {
+        strcpy(candidatos[i].names, argv[i+1]);
+        candidatos[i].votes = 0;
+    }
+
     //aviso caso o programa seja executado errado
     if (argc == 1)
     {
         printf("Usage: plurality [candidate ...]\n");
         return 1;
     }
+    
     //define um limite para o maximo de candidatos (9)
-    if (argc > MAX)
+    if (argc > MAX + 1)
     {
         return 1;
     }
+    
     printf("Numbeer of voters: ");
     scanf("%d", &voters);
-    for (int i = 1; i < voters; i++)
-    {
-        char nomedovoto[50];
-        bool status_vote = false;
+    
+    for (int i = 0; i < voters; i++)
+    {   
+        statusvote = false;
+        char nomedovote[50];
         printf("Vote: ");
-        scanf("%49[^\n]", nomedovoto);
-        for (int i = 1; i < argc; i++)
+        scanf(" %49[^\n]", nomedovote);
+        for (int i = 0; i < length; i++)
         {
-            if (strcmp(nomedovoto, candidatos.names[i]))
+            if (strcmp(nomedovote, candidatos[i].names) == 0)
             {
-                candidatos.votes[i]++;
-                status_vote = true;
+                candidatos[i].votes++;
+                statusvote = true;
             }
         }
-        if (status_vote == false)
+        if (statusvote == false)
         {
             printf("Invalid vote.\n");
         }
     }
-    selection(argc, candidatos.votes);
-    printf("%s", candidatos.names[argc-1]);
+    selection(length, candidatos);
+    printf("%s\n", candidatos[length - 1].names);
 }
 
-void selection(int length, int *list)
+void selection(int length, cand list[])
 {
-    for (int i = 0; i < length; i++)
+    for (int i = 0; i < length - 1; i++)
     {
         int min_idx = i;
         for (int j = i + 1; j < length; j++)
         {
-            if (list[min_idx] > list[j])
+            if (list[min_idx].votes > list[j].votes)
             {
                 min_idx = j;
             }
         }
-        int smaller = list[min_idx];
+        cand smaller = list[min_idx];
         list[min_idx] = list[i];
         list[i] = smaller;     
     }
