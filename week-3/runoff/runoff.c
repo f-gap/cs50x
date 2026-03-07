@@ -47,6 +47,7 @@ int main(int argc, string argv[])
         printf("Maximum number of candidates is %i\n", MAX_CANDIDATES);
         return 2;
     }
+    //copying values for our variable
     for (int i = 0; i < candidate_count; i++)
     {
         candidates[i].name = argv[i + 1];
