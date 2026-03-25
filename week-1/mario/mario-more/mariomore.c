@@ -1,5 +1,6 @@
 #include <stdio.h>
 
+void pyramid(int height);
 int main() 
 {
     int altura = 0;
@@ -9,9 +10,15 @@ int main()
         printf("Height: ");
         scanf("%d", &altura); 
     } while (altura < 1 || altura > 8);
-    for (int i = 0; i < altura; i++)
+    pyramid(altura);
+    return 0;
+}
+
+void pyramid(int height)
+{
+    for (int i = 0; i < height; i++)
     {
-            for (int espaços = 0; espaços <= altura - i; espaços++)
+            for (int espaços = 0; espaços <= height - i; espaços++)
             {
                 printf(" ");
             }
@@ -26,5 +33,4 @@ int main()
             }
         printf ("\n");
     }
-    return 0;
 }
