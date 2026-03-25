@@ -7,4 +7,5 @@
 # A menos que seja um arquivo específico que você quer manter (ex: Makefile)
 !Makefile
 !*.c
+!*.py
 !*.h
