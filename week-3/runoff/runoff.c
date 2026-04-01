@@ -79,7 +79,7 @@ int main(int argc, char *argv[])
             // Record vote, unless it's invalid
             if (!vote(i, j, name))
             {
-                printf("Invalid vote.\n");
+                printf("Invalid vote!\n");
                 return 4;
             }
         }
