@@ -55,7 +55,9 @@ int main(int argc, char *argv[])
         candidates[i].eliminated = false;
     }
 
-    voter_count = get_int("Number of voters: ");
+    // voter_count = get_int("Number of voters: ");
+    printf("Number of voters: ");
+    scanf("%d", &voter_count);
     if (voter_count > MAX_VOTERS)
     {
         printf("Maximum number of voters is %i\n", MAX_VOTERS);
@@ -70,7 +72,7 @@ int main(int argc, char *argv[])
         for (int j = 0; j < candidate_count; j++)
         {
             // string name = get_string("Rank %i: ", j + 1);
-            char *name;
+            char name[50];
             printf("Rank %i: ", j + 1);
             scanf("%s", name);
 
@@ -132,16 +134,12 @@ bool vote(int voter, int rank, char *name)
 {
     for (int i = 0; i < candidate_count; i++)
     {
-        if (candidates[i].eliminated == false)
-        {
-            if (strcmp(name, candidates[i].name) == 0)
+        if (strcmp(name, candidates[i].name) == 0)
             {
                 //o eleitor de indice "voter" na sua preferência de posição "rank" escolhe o candidato de indice "i"
                 preferences[voter][rank] = i;
                 return true;
             }
-        }
-        
     }
     return false;
 }
@@ -159,7 +157,6 @@ void tabulate(void)
                 break;
             }
         }
-        
     }
     
     return;
