@@ -130,6 +130,7 @@ int main(int argc, char *argv[])
     // Write new pixels to outfile
     for (int i = 0; i < height; i++)
     {
+        //.
         // Write row to outfile
         fwrite(image[i], sizeof(RGBTRIPLE), width, outptr);
 
