@@ -84,7 +84,7 @@ int main(int argc, char *argv[])
         return 7;
     }
 
-    // Determine padding for scanlines
+    // Determine padding(espaçamento) for scanlines
     int padding = (4 - (width * sizeof(RGBTRIPLE)) % 4) % 4;
 
     // Iterate over infile's scanlines
