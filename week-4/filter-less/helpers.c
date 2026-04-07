@@ -8,11 +8,11 @@ void grayscale(int height, int width, RGBTRIPLE image[height][width])
     {
         for (int j = 0; j < width; j++)
         {
-            BYTE media = (BYTE) round((image[i][j].rgbtBlue + image[i][j].rgbtGreen + image[i][j].rgbtRed)/3.0);    
+            BYTE media = (BYTE) round((image[i][j].rgbtBlue + image[i][j].rgbtGreen + image[i][j].rgbtRed)/3.0);
             image[i][j].rgbtBlue = media;
             image[i][j].rgbtGreen = media;
             image[i][j].rgbtRed = media;
-        }     
+        }
     }
     return;
 }
@@ -24,7 +24,7 @@ void sepia(int height, int width, RGBTRIPLE image[height][width])
     {
         for (int j = 0; j < width; j++)
         {
-            // BYTE media = (BYTE) round((image[i][j].rgbtBlue + image[i][j].rgbtGreen + image[i][j].rgbtRed)/3.0);    
+            // BYTE media = (BYTE) round((image[i][j].rgbtBlue + image[i][j].rgbtGreen + image[i][j].rgbtRed)/3.0);
             // image[i][j].rgbtBlue = media;
             // image[i][j].rgbtGreen = media;
             // image[i][j].rgbtRed = media;
@@ -34,7 +34,7 @@ void sepia(int height, int width, RGBTRIPLE image[height][width])
             image[i][j].rgbtBlue = sepiaBlue;
             image[i][j].rgbtGreen = sepiaGreen;
             image[i][j].rgbtRed = sepiaRed;
-        }     
+        }
     }
     return;
 }
@@ -49,7 +49,7 @@ void reflect(int height, int width, RGBTRIPLE image[height][width])
             RGBTRIPLE temp = image[i][n];
             image[i][n] = image[i][j];
             image[i][j] = temp;
-        }     
+        }
     }
     return;
 }
@@ -68,7 +68,7 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
             copy[i][j] = image[i][j];
         }
     }
-    
+
     //Aplicando a nova cor aos pixels (cor calculada através da função average)
     for (int i = 0; i < height; i++)
     {
