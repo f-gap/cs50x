@@ -54,6 +54,8 @@ void reflect(int height, int width, RGBTRIPLE image[height][width])
     return;
 }
 
+//Average prototype
+RGBTRIPLE average(int row, int col, int height, int width, RGBTRIPLE copy[height][width]);
 // Blur image
 void blur(int height, int width, RGBTRIPLE image[height][width])
 {
@@ -66,35 +68,51 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
             copy[i][j] = image[i][j];
         }
     }
-
+    
+    //Aplicando a nova cor aos pixels (cor calculada através da função average)
+    for (int i = 0; i < height; i++)
+    {
+        for (int j = 0; j < width; j++)
+        {
+            image[i][j] = average(i,j,height,width, copy);
+        }
+    }
     return;
 }
 
-RGBTRIPLE average(int height, int width, RGBTRIPLE copy[height][width])
+RGBTRIPLE average(int row, int col, int height, int width, RGBTRIPLE copy[height][width])
 {
-    BYTE denominator = 0;
-    RGBTRIPLE average;
-    for (int i = height - 1; i <= height + 1; i++)
+    // BYTE denominator = 0;
+    // RGBTRIPLE average;
+    int sumBlue = 0;
+    int sumGreen = 0;
+    int sumRed = 0;
+    float denominator = 0;
+    RGBTRIPLE avg;
+    // for (int i = row - 1; i <= row + 1; i++)
+    // {
+    //     for (int j = col - 1; j <= col + 1; j++)
+    //     {
+    //         average.rgbtBlue = 0;
+    //         average.rgbtGreen = 0;
+    //         average.rgbtRed = 0;
+    //     }
+    // }
+    for (int i = row - 1; i <= row + 1; i++)
     {
-        for (int j = width - 1; j <= width + 1; j++)
+        for (int j = col - 1; j <= col + 1; j++)
         {
-            average.rgbtBlue = 0;
-            average.rgbtGreen = 0;
-            average.rgbtRed = 0;
+            if (i >= 0 && j >= 0 && i < height && j < width)
+            {
+                sumBlue += (int) copy[i][j].rgbtBlue;
+                sumGreen += (int) copy[i][j].rgbtGreen;
+                sumRed += (int) copy[i][j].rgbtRed;
+                denominator++;
+            }
         }
     }
-    for (int i = height - 1; i <= height + 1; i++)
-    {
-        for (int j = width - 1; j <= width + 1; j++)
-        {
-            average.rgbtBlue += copy[i][j].rgbtBlue;
-            average.rgbtGreen += copy[i][j].rgbtGreen;
-            average.rgbtRed += copy[i][j].rgbtRed;
-            denominator++;
-        }
-    }
-    average.rgbtBlue /= denominator;
-    average.rgbtGreen /= denominator;
-    average.rgbtRed /= denominator;
-    return average;
+    avg.rgbtBlue = (BYTE) round(sumBlue/denominator);
+    avg.rgbtGreen = (BYTE) round(sumGreen/denominator);
+    avg.rgbtRed = (BYTE) round(sumRed/denominator);
+    return avg;
 }
