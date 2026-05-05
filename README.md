@@ -1,3 +1,4 @@
+<img width="352" height="107" alt="image" src="https://github.com/user-attachments/assets/25447349-8796-40e9-bc11-4d8c6ebe94e6" />
 # Práticas do CS50x 💻
 Repositório para armazenar códigos dos meus estudos introdutórios do cs50x.
 ## 🗂️ Estrutura do Repositório
